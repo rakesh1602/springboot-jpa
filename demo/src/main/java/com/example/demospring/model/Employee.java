@@ -1,4 +1,4 @@
-package com.example.newdemo.model;
+package com.example.demospring.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,11 +8,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Employee {
+
     private String firstName;
     private String lastName;
 
     public Employee() {
-
     }
-}
 
+}

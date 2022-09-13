@@ -7,9 +7,9 @@ import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -44,6 +44,10 @@ public class EmployeeService {
         return empEntity;
     }
 
+    public List<EmployeeEntity> getAllEmployee() {
+        return employeeEntityList;
+    }
+
     public EmployeeResponse createEmployee(Employee employee) {
         int id = new Random().nextInt();
         EmployeeResponse employeeResponse = new EmployeeResponse();
@@ -58,25 +62,24 @@ public class EmployeeService {
             if (employeeId == e.getId()) {
                 e.setFirstName(employee.getFirstName());
                 e.setLastName(employee.getLastName());
-                break;
-
             }
-            log.info("Updated Employees are :  {} {}", employee.getFirstName(), employee.getLastName());
         }
+        log.info("Updated Employees are :  {} {}", employee.getFirstName(), employee.getLastName());
 
         return employee;
     }
 
-    public EmployeeEntity deleteEmployee(Long employeeId) {
-        for (Iterator<EmployeeEntity> iterator = employeeEntityList.iterator(); iterator.hasNext(); ) {
-            EmployeeEntity e = iterator.next();
-            if (e.getId() == employeeId) {
-                iterator.remove();
-            }
-        }
 
-        return employeeEntity;
+    public void deleteEmployee(Long employeeId) {
+        //employeeEntityList.stream().filter(t -> t.getId() == employeeId).collect(Collectors.toList());
+        employeeEntityList.removeIf(t -> t.getId() == employeeId);
+        log.info("Deleted");
     }
 }
+
+
+
+
+
 
 
