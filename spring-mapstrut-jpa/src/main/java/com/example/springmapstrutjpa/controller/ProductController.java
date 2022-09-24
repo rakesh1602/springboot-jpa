@@ -38,4 +38,14 @@ public class ProductController {
         return new ResponseEntity<>(personMapper.modelToDto(personRepository.findById(id).get()),HttpStatus.OK);
 
     }
+
+    @DeleteMapping("/persons/id")
+    public ResponseEntity<PersonDto> deleteById(@PathVariable(value = "id")Long id){
+        PersonDto personDto=personMapper.modelToDto(personRepository.findById(id).get());
+        personRepository.deleteById(personDto.getId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    }
+
+
 }

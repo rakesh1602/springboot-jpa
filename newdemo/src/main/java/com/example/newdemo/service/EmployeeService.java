@@ -3,6 +3,7 @@ package com.example.newdemo.service;
 import com.example.newdemo.entity.EmployeeEntity;
 import com.example.newdemo.model.Employee;
 import com.example.newdemo.model.EmployeeResponse;
+import lombok.AllArgsConstructor;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @Log4j2
 @ToString
+@AllArgsConstructor
 public class EmployeeService {
 
     public List<EmployeeEntity> employeeEntityList;
