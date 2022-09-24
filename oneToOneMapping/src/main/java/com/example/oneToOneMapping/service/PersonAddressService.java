@@ -34,24 +34,6 @@ public class PersonAddressService {
         AddressEntity addressEntity=null;
         addressEntity= personAddressMapper.personToEntity(new Address());
 
-
-        /*AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setAddressOne(person.getAddress().getAddressOne());
-        addressEntity.setAddressTwo(person.getAddress().getAddressTwo());
-        addressEntity.setCity(person.getAddress().getCity());
-        addressEntity.setState(person.getAddress().getState());
-        addressEntity.setZipCode(person.getAddress().getZipCode());
-//         addressRepository.save(addressEntity);
-        PersonResponse personResponse = new PersonResponse();
-//        Long random = (long) (Math.random() * 10);
-
-
-        PersonEntity personEntity = new PersonEntity();
-        personEntity.setFirstName(person.getFirstName());
-        personEntity.setLastName(person.getLastName());
-        personEntity.setAddress(addressEntity);
-        personRepository.save(personEntity);*/
-
         personRepository.save(personEntity);
         PersonResponse personResponse = new PersonResponse();
         personResponse.setId(personEntity.getId());
