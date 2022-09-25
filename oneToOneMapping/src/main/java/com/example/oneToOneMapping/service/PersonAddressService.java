@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 public class PersonAddressService {
@@ -54,18 +56,28 @@ public class PersonAddressService {
     }
 
     public void deletePerson(Long id) {
-        personRepository.deleteById(id);
+        Optional<PersonEntity> peopleEntityOptional = personRepository.findById(id);
+        if (peopleEntityOptional.isPresent()) {
+            personRepository.deleteById(id);
+        } else {
+            log.info("Person id " + id+ "Not found");
+        }
+
     }
 
-    public Person updatePerson(Long id) {
-        Person person=new Person();
-        PersonEntity personEntity=personRepository.findById(id).orElse(null);
-        if(personEntity!=null){
+
+    public Person updatePerson(Long id, Person person) {
+        PersonEntity personEntity=new PersonEntity();
+        Optional<PersonEntity> optionalPersonEntity=personRepository.findById(id);
+        if(optionalPersonEntity.isPresent()){
+
+            /*personEntity.setFirstName(person.getFirstName());
+            personEntity.setLastName(person.getLastName());*/
             personAddressMapper.personToEntity(person);
-            personAddressMapper.personToEntity(new Address());
+            personRepository.save(personEntity);
             log.info("Updated");
         } else {
-            log.info("No such id found");
+            log.info("Person id " + id+ "Not found");
         }
         return person;
     }
